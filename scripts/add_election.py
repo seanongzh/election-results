@@ -16,16 +16,24 @@ while (position_id == None):
   cur.execute("SELECT id FROM elected_positions WHERE name=%s",(position,))
   position_id = cur.fetchone()
   if position_id == None:
-    print("Not found in database. Try again.")
+    print(">> Not found in database. Try again.")
 position_id = str(position_id[0])
 
 election_id = None
 while (election_id == None):
   year = input("Year? ")
-  cur.execute("INSERT INTO elections(year, position_id) VALUES(%s, %s) RETURNING id", (year, position_id))
+  unexp_is_present = False
+  if (input("Unexpired term? (Y/N) ") == "Y"):
+    unexp_is_present = True
+  if unexp_is_present:
+    unexp_length = input("Number of years remaining? ")
+    cur.execute("INSERT INTO elections(year, position_id, unexpired_term_length) \
+                VALUES(%s, %s, %s) RETURNING id", (year, position_id, unexp_length))
+  else:
+    cur.execute("INSERT INTO elections(year, position_id) VALUES(%s, %s) RETURNING id", (year, position_id))
   election_id = cur.fetchone()
   if election_id == None:
-    print("Error inserting election into database. Try again.")
+    print(">> Error inserting election into database. Try again.")
 election_id = str(election_id[0])
 
 num_candidates = int(input("How many candidates? "))
@@ -38,7 +46,7 @@ for x in range(num_candidates):
     cur.execute("SELECT id FROM candidates WHERE full_name=%s",(candidate,))
     candidate_id = cur.fetchall()
     if candidate_id == None:
-      print("Not found in database. Try again.")
+      print(">> Not found in database. Try again.")
   to_keep = 0
   if (len(candidate_id) > 1):
     print(candidate_id)
@@ -56,7 +64,7 @@ for x in range(num_candidates):
       cur.execute ("SELECT id FROM parties WHERE name=%s",(party,))
       party_id = cur.fetchone()
       if party_id == None:
-        print("Not found in database. Try again.")
+        print(">> Not found in database. Try again.")
     party_id = str(party_id[0])
 
   votes = input("No. of votes? ")
@@ -72,7 +80,7 @@ for x in range(num_candidates):
     cur.execute("INSERT INTO results(election_id, candidate_id, votes, municipal_winner, \
                 overall_winner, incumbent) VALUES(%s,%s,%s,%s,%s,%s)",
                 (election_id, candidate_id, votes, municipal_winner, overall_winner, incumbent))
-  print("Successfully inserted.\n")
+  print(">> Successfully inserted.\n")
 
 conn.commit()
 cur.close()
