@@ -18,7 +18,8 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('search/', include("search.urls")),
+    path('data/', include("data.urls")),
     path('admin/', admin.site.urls),
-    path('', RedirectView.as_view(url='search/', permanent=True))
+    path('', RedirectView.as_view(url='data/', permanent=True)),
+    path('search/', include("watson.urls", namespace="watson"))
 ]

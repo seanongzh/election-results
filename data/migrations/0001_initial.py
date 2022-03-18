@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('level', models.CharField(choices=[('municipal', 'Municipal'), ('county', 'County'), ('state', 'State'), ('national', 'National')], default='municipal', max_length=9)),
                 ('eliminated_in', models.IntegerField(blank=True, null=True)),
                 ('primary', models.BooleanField(default=False)),
-                ('replaced_with', models.OneToOneField(blank=True, db_column='replaced_with', null=True, on_delete=django.db.models.deletion.CASCADE, to='search.electedposition')),
+                ('replaced_with', models.OneToOneField(blank=True, db_column='replaced_with', null=True, on_delete=django.db.models.deletion.CASCADE, to='data.electedposition')),
             ],
             options={
                 'db_table': 'elected_positions',
@@ -49,7 +49,7 @@ class Migration(migrations.Migration):
                 ('year', models.IntegerField()),
                 ('unexpired_term_length', models.IntegerField(blank=True, null=True)),
                 ('notes', models.CharField(blank=True, max_length=255, null=True)),
-                ('position', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='search.electedposition')),
+                ('position', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='data.electedposition')),
             ],
             options={
                 'db_table': 'elections',
@@ -76,9 +76,9 @@ class Migration(migrations.Migration):
                 ('overall_winner', models.BooleanField(blank=True, null=True)),
                 ('incumbent', models.BooleanField(blank=True, null=True)),
                 ('notes', models.CharField(blank=True, max_length=255, null=True)),
-                ('candidate', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='search.candidate')),
-                ('election', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='search.election')),
-                ('party', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='search.party')),
+                ('candidate', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='data.candidate')),
+                ('election', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='data.election')),
+                ('party', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='data.party')),
             ],
             options={
                 'db_table': 'results',
