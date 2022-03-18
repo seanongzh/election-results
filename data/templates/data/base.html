@@ -1,0 +1,35 @@
+{# Base template for the Elections Database #}
+{#  Provides basic look and feel of website #}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {# TODO: add stylesheet #}
+    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}Unofficial Kenilworth, NJ Election Results Database{% endblock %}</title>
+  </head>
+
+  <body>
+    <div id="header">
+      {% block header %}
+        <form action="{% url 'watson:search' %}">
+          <input name="q" value="{{request.GET.q}}">
+          <input type="submit" value="Go">
+        </form>
+      {% endblock %}
+    </div>
+
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin/">Admin</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}Welcome to the Unofficial Kenilworth, NJ Election Results Database. Try searching for a candidate, elected position, or election year that you are interested in.{% endblock %}
+    </div>
+  </body>
+</html>
