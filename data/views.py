@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 def home(request):
-    return HttpResponse("This is the main page for the Kenilworth Election Results database.")
+    return render(request, 'data/base.html')
