@@ -1,19 +1,58 @@
+# MODEL DEFINITIONS
+# For a database that stores election results 
+
 from django.db import models
+from django.urls import reverse
 from django.contrib.postgres.fields import ArrayField
 
+# Definition of Candidate model:
+#   Stores info on all election candidates recorded in this database
+#   Currently just stores names
+#   TODO: Additional fields like gender, party, deceased or not?
 class Candidate(models.Model):
-    first = models.CharField(max_length=255, blank=True, null=True)
-    last = models.CharField(max_length=255)
-    middle = models.CharField(max_length=2, blank=True, null=True)
-    suffix = models.CharField(max_length=5, blank=True, null=True)
-    full_name = models.CharField(max_length=255)
-    aka = ArrayField(models.CharField(max_length=255), blank=True, null=True)
+    # Candidate must have at least a last name
+    #   Useful for historical data with incomplete candidate names
+    first = models.CharField("first name", max_length=255, blank=True)
+    last = models.CharField("last name", max_length=255)
 
+    # Middle initial should be stored without periods or spaces
+    middle = models.CharField("middle initial", max_length=5, blank=True, \
+        help_text="without periods or spaces")
+    
+    # Suffix should be stored with all relevant punctuation
+    suffix = models.CharField("suffix", max_length=5, blank=True, \
+        help_text="e.g. Jr., Sr., III")
+    
+    # Candidate must have a full name
+    # Full name must be unique (for now)
+    #   TODO: What if two unique individuals share the same full name? (unlikely)
+    # TODO: Auto-generate full name based on previous fields in .save() func
+    full_name = models.CharField(max_length=255, unique=True, \
+        help_text="Order: First Middle Last Suffix")
+
+    # Aliases are allowed
+    #   Useful for candidates who have run under different names
+    #   ArrayField is Postgres-specific
+    aka = ArrayField(models.CharField(max_length=255), blank=True, \
+        verbose_name="aliases", help_text="Full name format only")
+
+    # Metadata for Candidate
     class Meta:
-        db_table = 'candidates'
+        # Legacy issue: because tables were created before model was defined
+        #   (Applies to all models)
+        db_table = "candidates"
+        
+        # "Latest" candidate is just most recently added
+        get_latest_by = "id"
+        
+        # Ordered by last name, then first name etc.
+        ordering = ["last", "first", "middle", "suffix"]
 
+    # Additional model methods
     def __str__(self):
         return self.full_name
+    def get_absolute_url(self):
+        return reverse("candidate-detail", kwargs={"candidate_id" : self.id})
 
 
 class ElectedPosition(models.Model):
