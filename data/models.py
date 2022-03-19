@@ -52,7 +52,7 @@ class Candidate(models.Model):
     def __str__(self):
         return self.full_name
     def get_absolute_url(self):
-        return reverse("candidate-detail", kwargs={"candidate_id" : self.id})
+        return reverse("data:candidate-detail", kwargs={"candidate_id" : self.id})
 
 
 class ElectedPosition(models.Model):
