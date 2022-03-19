@@ -10,8 +10,8 @@
   </head>
 
   <body>
-    <div id="header">
-      {% block header %}
+    <div id="search">
+      {% block search %}
         <form action="{% url 'watson:search' %}">
           <input name="q" value="{{request.GET.q}}">
           <input type="submit" value="Go">
@@ -29,7 +29,10 @@
     </div>
 
     <div id="content">
-        {% block content %}Welcome to the Unofficial Kenilworth, NJ Election Results Database. Try searching for a candidate, elected position, or election year that you are interested in.{% endblock %}
+        {% block content %}
+          Welcome to the Unofficial Kenilworth, NJ Election Results Database. <br>
+          Try searching for a candidate, elected position, or election year that you are interested in.
+        {% endblock %}
     </div>
   </body>
 </html>
