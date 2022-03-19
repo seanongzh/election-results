@@ -1,0 +1,14 @@
+{# Base template for a candidate's detail page   #}
+{#  Extends base template for Elections Database #}
+
+{% extends "base.html" %}
+
+{% block title %}
+  {{ candidate.full_name }} - Unofficial Kenilworth, NJ Election Results Database
+{% endblock %}
+
+{% block content %}
+  <h1>{{ candidate.full_name }} - Detail</h1>
+  Here is the Kenilworth electoral history of {{ candidate.last_name }}:
+  TO BE FILLED IN
+{% endblock %}
