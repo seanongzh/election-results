@@ -1,0 +1,14 @@
+{# Base template for an election's detail page   #}
+{#  Extends base template for Elections Database #}
+
+{% extends "./base.html" %}
+
+{% block title %}
+  {{ election.position }} {{ election.year }} - Unofficial Kenilworth, NJ Election Results Database
+{% endblock %}
+
+{% block content %}
+  <h1>{{ election.position }} {{ election.year }} - Detail</h1>
+  Here is the summary of results for the election of {{ election.position }} in {{ election.year }}:<br>
+  TO BE FILLED IN
+{% endblock %}

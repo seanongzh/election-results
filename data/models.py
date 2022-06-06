@@ -73,7 +73,8 @@ class ElectedPosition(models.Model):
 
     def __str__(self):
         return self.name
-
+    def get_absolute_url(self):
+        return reverse("data:position-detail", kwargs={"position_id" : self.id})
 
 class Election(models.Model):
     year = models.IntegerField()
@@ -89,7 +90,8 @@ class Election(models.Model):
             %(str(self.position), \
               str(self.year), \
               "" if self.unexpired_term_length is None else " (Unexpired: %s)" %(str(self.unexpired_term_length)))
-
+    def get_absolute_url(self):
+        return reverse("data:election-detail", kwargs={"election_id" : self.id})
 
 class Party(models.Model):
     name = models.CharField(max_length=255)
@@ -101,6 +103,8 @@ class Party(models.Model):
     
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return reverse("data:party-detail", kwargs={"party_id" : self.id})
 
 
 class Result(models.Model):
@@ -119,3 +123,5 @@ class Result(models.Model):
     
     def __str__(self):
         return "%s for %s" %(str(self.candidate), str(self.election))
+    def get_absolute_url(self):
+        return reverse("data:election-detail", kwargs={"election_id" : self.election.id})
