@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block site-title %}
+    <title>{{ model }}: {{ object }} | Elections Database</title>
+{% endblock %}
+
+{% block title %}
+    <h1>{{ model }}: {{ object }}</h1>
+{% endblock %}
+
+{% block query-prompt %}{% endblock %}
+
+{% block content %}
+    {% block description %}{% endblock %}
+    {% block list %}{% endblock %}
+    {% block legend %}
+        <p><em>
+            * Overall winner<br>
+            ^ Incumbent
+        </p></em>
+    {% endblock %}
+{% endblock %}

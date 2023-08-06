@@ -1,0 +1,22 @@
+{% extends "base_detail.html" %}
+
+{% block description %}
+    <p>
+        <strong>Party affiliation:</strong>
+        <a href="{{ object.latest_party.get_absolute_url }}">{{ object.latest_party.party_demonym }}</a>
+    </p>
+{% endblock %}
+
+{% block list %}
+    <p><strong>Election results:</strong>
+        <ol>
+            {% for result in results %}
+                <li>
+                    <a href="{{ result.election.get_absolute_url }}">{{ result.election }}</a>:
+                    {{ result.votes }} votes
+                    {% if result.candidate_is_winner %}*{% endif %}{% if result.candidate_is_incumbent %}^{% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    </p>
+{% endblock %}

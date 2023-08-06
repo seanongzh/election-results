@@ -1,0 +1,20 @@
+{% extends "base_detail.html" %}
+
+{% block list %}
+    <p><strong>Results:</strong>
+        <ol>
+            {% for result in results %}
+                <li>
+                    <a href="{{ result.candidate.get_absolute_url }}">{{ result.candidate }}</a>:
+                    {{ result.votes }} votes
+                    {% if result.candidate_is_winner %}*{% endif %}{% if result.candidate_is_incumbent %}^{% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+    </p>
+{% endblock %}
+
+{% block content %}
+    {{ block.super }}
+    <p><strong>View electoral history for <a href="{{ object.position.get_absolute_url }}">{{ object.position }}</a></strong></p>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block site-title %}
+    <title>{{ model }} | Elections Database</title>
+{% endblock %}
+
+{% block title %}
+    <h1>{{ model }}</h1>
+{% endblock %}
+
+{% block query-prompt %}{% endblock %}
+
+{% block content %}
+    <p>
+        <ol>
+            {% for object in object_list %}
+                <li>
+                    <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    </p>
+{% endblock %}

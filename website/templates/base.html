@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        {% block site-title %}<title>Elections Database</title>{% endblock %}
+    </head>
+    <body>
+        {% block menu %}
+            <h3>
+                <a href="{% url 'home' %}">Home</a> |
+                <a href="{% url 'election-list' %}">Elections</a> |
+                <a href="{% url 'position-list' %}">Positions</a> |
+                <a href="{% url 'candidate-list' %}">Candidates</a> |
+                <a href="{% url 'party-list' %}">Parties</a> |
+                <a href="{% url 'admin:index' %}">Admin</a>
+            </h3>
+        {% endblock %}
+        {% block search-bar %}
+            {% load watson %}
+            <form action="{% url 'watson:search' %}">
+                {% csrf_token %}
+                Search: <input name="q" value="{{ request.GET.q }}">
+                <input type="submit" value="Go">
+            </form>
+        {% endblock %}
+        <p></p>
+        <hr>
+        {% block title %}<h1>Welcome to the Elections Database!</h1>{% endblock %}
+        {% block query-prompt %}<p><em>Please enter a query in the search bar.</em></p>{% endblock %}
+        {% block content %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,13 @@
+{% extends "base_detail.html" %}
+
+{% block list %}
+    <p><strong>Affiliated candidates:</strong>
+        <ol>
+            {% for candidate in candidates %}
+                <li><a href="{{ candidate.get_absolute_url }}">{{ candidate }}</a></li>
+            {% endfor %}
+        </ol>
+    </p>
+{% endblock %}
+
+{% block legend %}{% endblock %}

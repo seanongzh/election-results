@@ -1,0 +1,19 @@
+{% extends "base_detail.html" %}
+
+{% block description %}
+    <p><strong>Level of government:</strong> {{ object.get_government_level_display }}</p>
+{% endblock %}
+
+{% block list %}
+    <p><strong>Electoral history:</strong>
+        <ol>
+            {% for election in elections %}
+                <li><a href="{{ election.get_absolute_url }}">
+                    {{ election.year }}{% if election.is_special %} (Special){% endif %}
+                </li></a>
+            {% endfor %}
+        </ol>
+    </p>
+{% endblock %}
+
+{% block legend %}{% endblock %}
