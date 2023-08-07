@@ -10,7 +10,7 @@ A searchable database of historical U.S. election results at the municipal level
 ## Implementation
 Using Django and postgresql. Comes with full-text search based on [Watson](https://github.com/etianen/django-watson), a Django search plugin. 
 
-### Alpha version
+### [Alpha version](https://electionresults.up.railway.app)
 Currently utilizing a set of historical election results from Kenilworth, NJ. Compiled via open source.
 
 ## License
