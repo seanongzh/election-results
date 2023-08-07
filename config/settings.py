@@ -27,7 +27,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = False
 ALLOWED_HOSTS = ['*']
 CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
 
 # Application definition
 
