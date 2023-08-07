@@ -1,14 +1,17 @@
 # Election Results Database
-**Alpha version:** A searchable database of historical U.S. election results at the municipal level. Suitable for tracking local politics and voting trends. 
+A searchable database of historical U.S. election results at the municipal level. Suitable for tracking local politics and voting trends. 
 
 ## Data types
-- Candidates are stored by name and party affiliation.
-- Positions are stored by name and the level of government at which they operate: currently set as municipal, county, state, and national.
-- Elections are stored by year and position, with the option to set it as a special election that filled a vacant seat.
-- Results are stored by election and candidate, with the option to indicate that the candidate was an incumbent and/or "won" the overall race but not at the local level, in cases where the municipality has different political leanings than higher levels of government.
+- Candidates: name; party affiliation.
+- Positions: name; level of government at which they operate (municipal, county, state, and national).
+- Elections: year; position; special election or not.
+- Results: election; candidate; incumbent or not; "overall winner" or not (where the candidate may have won the overall race but not locally or vice versa).
 
 ## Implementation
 Using Django and postgresql. Comes with full-text search based on [Watson](https://github.com/etianen/django-watson), a Django search plugin. 
+
+### Alpha version
+Currently utilizing a set of historical election results from Kenilworth, NJ. Compiled via open source.
 
 ## License
 This project is licensed under the terms of the MIT license.
