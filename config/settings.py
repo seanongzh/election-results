@@ -130,7 +130,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = str(BASE_DIR / 'static')
+STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = ['/www/election-results.up.railway.app/static']
 STORAGES = {
     # ...
     'staticfiles': {
